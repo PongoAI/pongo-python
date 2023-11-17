@@ -1,4 +1,4 @@
-from .upload import upload
+from .upload import upload, upload_pdf
 from .scrape import scrape_website
 from .integrations.get_auth_link import get_auth_link
 from .integrations.update_drive_directories import update_drive_directories
@@ -104,6 +104,31 @@ class PongoClient:
             sub_org=sub_org,
             source_name=source_name,
             data=data,
+            metadata=metadata,
+            timestamp=timestamp,
+            parent_id=parent_id,
+            version=self.version,
+        )
+    
+    def upload_pdf(
+        self, sub_org, source_name, file_path, parent_id=None, metadata={}, timestamp=None
+    ):
+        """
+        Uploads a pdf to pongo for semantic search.
+        :param sub_org: Sub organization of the data.
+        :param source_name: Name of the source of the data.
+        :param data: Data to be uploaded. Can be a single string or a list of strings.
+        :param metadata: Metadata for the data. Can be a single dictionary or a list of dictionaries.
+        :param timestamp: Timestamp for the data. Defaults to the current time.
+        :return: Response from the server.
+        """
+
+        return upload_pdf(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            sub_org=sub_org,
+            source_name=source_name,
+            file_path=file_path,
             metadata=metadata,
             timestamp=timestamp,
             parent_id=parent_id,
