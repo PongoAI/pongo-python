@@ -1,0 +1,4 @@
+.env
+pongo.egg-info/
+__pycache__/
+pongo/__pycache__/

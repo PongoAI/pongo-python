@@ -1,0 +1,21 @@
+from setuptools import setup, find_packages
+
+setup(
+    name='pongo',
+    version='0.1.0',
+    packages=find_packages(),
+    description='A Python package for interacting with the Pongo API',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
+    author='Caleb John',
+    author_email='caleb.john@joinpongo.com',
+    url='https://github.com/PongoAI/pongo-python',
+    install_requires=[
+        'requests',  # Include any other dependencies your package needs
+    ],
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: Apache2.0 License',
+        'Operating System :: OS Independent',
+    ],
+)
