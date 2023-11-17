@@ -1,4 +1,7 @@
 from .upload import upload
+from .integrations.get_auth_link import get_auth_link
+from .integrations.update_drive_directories import update_drive_directories
+from .integrations.disconnect_integration import disconnect_integration
 from .utils import BASE_URL
 import requests
 
@@ -56,3 +59,52 @@ class PongoClient:
             timestamp=timestamp,
             version=self.version,
         )
+
+    def get_auth_link(self, id,integration_name,redirect_uri):
+        """
+        Generates a link that sub-organizations can use to authenticate with other platforms and have their data ingested by Pongo.
+
+        :param id: ID of the sub-organization to generate a link for
+        :param integration_name: Name of the integration to authenticate with
+        :param redirect_uri: The address users will be sent to after completing the authentication process- wether successful or unsuccessful.
+        :return: Response from the server containing the authentication link or error message.
+        """
+        return get_auth_link(
+        public_key=self.user_id,
+        secret_key=self.secret_key,
+        id=id,
+        integration_name=integration_name,
+        redirect_uri=redirect_uri,
+        version=self.version
+        )
+
+    def update_drive_directories(self, new_dirs, integration_id):
+        """
+        Generates a link that sub-organizations can use to authenticate with other platforms and have their data ingested by Pongo.
+
+        :param integration_id: ID of the google drive integration to update
+        :param new_dirs: Array containing the new "enabled" states of google drive directories, id's and length must be the same
+        :param redirect_uri: The address users will be sent to after completing the authentication process- wether successful or unsuccessful.
+        :return: Response from the server containing the authentication link or error message.
+        """
+        return update_drive_directories(
+        public_key=self.user_id,
+        secret_key=self.secret_key,
+        new_dirs=new_dirs,
+        integration_id=integration_id,
+        version=self.version
+        )
+    def disconnect_integration(self, id, name,):
+        """
+        Disconnect an integration and delete all of its data
+
+        :param id: ID of the integration to delete
+        :param name: Name of the integration to delete
+        :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
+        """
+        return disconnect_integration(
+        public_key=self.user_id,
+        secret_key=self.secret_key,
+        id=id,
+        name=name,
+        version=self.version)
