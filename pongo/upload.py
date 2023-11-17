@@ -1,5 +1,5 @@
 import time
-from typing import List
+import uuid
 import requests
 from .utils import BASE_URL
 
@@ -11,6 +11,7 @@ def upload(
     source_name,
     data,
     metadata={},
+    parent_id=None,
     timestamp=None,
     version="v1",
 ):
@@ -34,14 +35,20 @@ def upload(
     if type(data) == str or type(data) == list:
         payload = {
             "sub_org_id": sub_org,
-            "source_name": source_name,
+            "source": source_name,
             "data": data,
             "metadata": metadata,
+            "timestamp": timestamp,
+            "parent_id": parent_id,
         }
 
 
     if not timestamp:
         payload["timestamp"] = int(time.time())
+    
+    if not parent_id:
+        payload["parent_id"] = str(uuid.uuid4())
 
     response = requests.post(url, headers=headers, json=payload)
     return response
+
