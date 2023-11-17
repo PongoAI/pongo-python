@@ -1,5 +1,3 @@
-import time
-import uuid
 import requests
 from .utils import BASE_URL
 

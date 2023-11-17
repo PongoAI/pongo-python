@@ -3,6 +3,7 @@ from .scrape import scrape_website
 from .integrations.get_auth_link import get_auth_link
 from .integrations.update_drive_directories import update_drive_directories
 from .integrations.disconnect_integration import disconnect_integration
+from .search import search
 from .utils import BASE_URL
 import requests
 
@@ -38,6 +39,24 @@ class PongoClient:
             raise Exception("Server error")
         else:
             return response
+    
+    def search(self, sub_org, query, start_time=None, end_time=None, sources=[], num_results=15, max_reranker_results=5):
+        """
+        Searches for data in the Pongo API.
+        OPTIONAL: start_time, end_time, sources
+        """
+        return search(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            sub_org=sub_org,
+            query=query,
+            sources=sources,
+            start_time=start_time,
+            end_time=end_time,
+            num_results=num_results,
+            max_reranker_results=max_reranker_results,
+            version=self.version,
+        )
 
     def upload(self, sub_org, source_name, data, parent_id=None, metadata={}, timestamp=None):
         """
