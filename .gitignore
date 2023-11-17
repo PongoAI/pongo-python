@@ -2,3 +2,4 @@
 pongo.egg-info/
 __pycache__/
 pongo/__pycache__/
+venv/

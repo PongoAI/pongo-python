@@ -1,0 +1,30 @@
+import time
+from typing import List
+import requests
+from ..utils import BASE_URL
+
+
+def disconnect_integration(
+    public_key,
+    secret_key,
+    id,
+    name,
+    version="v1",
+):
+    """
+    Disconnect an integration and delete all of its data
+
+    :param id: ID of the integration to delete
+    :param name: Name of the integration to delete
+    :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
+    """
+
+    headers = {
+        "secret": secret_key,
+        "id": public_key,
+    }
+
+    url = f"{BASE_URL}/api/{version}/org/disconnect-integration"
+
+    response = requests.post(url, headers=headers, json={'id': id, 'name': name})
+    return response

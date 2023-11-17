@@ -13,7 +13,6 @@ class TestUpload(unittest.TestCase):
         pongo_client = pongo.PongoClient(PONGO_PUBLIC, PONGO_SECRET)
         test_str_data = "test"
         test_single_metadata = {"test": "metadata"}
-
         result = pongo_client.upload(sub_org="test", source_name="test", data=test_str_data, metadata=test_single_metadata)
         assert result.status_code == 200
     
