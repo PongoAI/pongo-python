@@ -4,6 +4,7 @@ from .integrations.get_auth_link import get_auth_link
 from .integrations.update_drive_directories import update_drive_directories
 from .integrations.disconnect_integration import disconnect_integration
 from .search import search
+from .get import get
 from .utils import BASE_URL
 import requests
 
@@ -58,6 +59,21 @@ class PongoClient:
             version=self.version,
         )
 
+    def get(self, sub_org, doc_id=None, parent_id=None):
+        """
+        Retrieves a single document chunk or a list of document chunks from the Pongo API.
+        :param doc_id: ID of the document to be retrieved.
+        :param parent_id: ID of the parent document to be retrieved. Will return all chunks of the parent document.
+        """
+        return get(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            sub_org=sub_org,
+            doc_id=doc_id,
+            parent_id=parent_id,
+            version=self.version,
+        )
+    
     def upload(self, sub_org, source_name, data, parent_id=None, metadata={}, timestamp=None):
         """
         Uploads a data to pongo for semantic search.
