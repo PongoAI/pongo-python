@@ -5,6 +5,7 @@ from .integrations.update_drive_directories import update_drive_directories
 from .integrations.disconnect_integration import disconnect_integration
 from .search import search
 from .get import get
+from .delete import delete
 from .utils import BASE_URL
 import requests
 
@@ -40,8 +41,17 @@ class PongoClient:
             raise Exception("Server error")
         else:
             return response
-    
-    def search(self, sub_org, query, start_time=None, end_time=None, sources=[], num_results=15, max_reranker_results=5):
+
+    def search(
+        self,
+        sub_org,
+        query,
+        start_time=None,
+        end_time=None,
+        sources=[],
+        num_results=15,
+        max_reranker_results=5,
+    ):
         """
         Searches for data in the Pongo API.
         OPTIONAL: start_time, end_time, sources
@@ -73,8 +83,10 @@ class PongoClient:
             parent_id=parent_id,
             version=self.version,
         )
-    
-    def upload(self, sub_org, source_name, data, parent_id=None, metadata={}, timestamp=None):
+
+    def upload(
+        self, sub_org, source_name, data, parent_id=None, metadata={}, timestamp=None
+    ):
         """
         Uploads a data to pongo for semantic search.
         :param sub_org: Sub organization of the data.
@@ -97,6 +109,20 @@ class PongoClient:
             version=self.version,
         )
 
+    def delete(self, sub_org, doc_id=None, parent_id=None):
+        """
+        Deletes a single document chunk or a list of document chunks from the Pongo API.
+        :param doc_id: ID of the document to be deleted.
+        :param parent_id: ID of the parent document to be deleted. Will delete all chunks of the parent document.
+        """
+        return delete(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            sub_org=sub_org,
+            doc_id=doc_id,
+            parent_id=parent_id,
+            version=self.version,
+        )
 
     def scrape_website(self, sub_org, site_name, site_url):
         """
@@ -118,7 +144,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def get_auth_link(self, id,integration_name,redirect_uri):
+    def get_auth_link(self, id, integration_name, redirect_uri):
         """
         Generates a link that sub-organizations can use to authenticate with other platforms and have their data ingested by Pongo.
 
@@ -128,12 +154,12 @@ class PongoClient:
         :return: Response from the server containing the authentication link or error message.
         """
         return get_auth_link(
-        public_key=self.user_id,
-        secret_key=self.secret_key,
-        id=id,
-        integration_name=integration_name,
-        redirect_uri=redirect_uri,
-        version=self.version
+            public_key=self.user_id,
+            secret_key=self.secret_key,
+            id=id,
+            integration_name=integration_name,
+            redirect_uri=redirect_uri,
+            version=self.version,
         )
 
     def update_drive_directories(self, new_dirs, integration_id):
@@ -146,13 +172,18 @@ class PongoClient:
         :return: Response from the server containing the authentication link or error message.
         """
         return update_drive_directories(
-        public_key=self.user_id,
-        secret_key=self.secret_key,
-        new_dirs=new_dirs,
-        integration_id=integration_id,
-        version=self.version
+            public_key=self.user_id,
+            secret_key=self.secret_key,
+            new_dirs=new_dirs,
+            integration_id=integration_id,
+            version=self.version,
         )
-    def disconnect_integration(self, id, name,):
+
+    def disconnect_integration(
+        self,
+        id,
+        name,
+    ):
         """
         Disconnect an integration and delete all of its data
 
@@ -161,8 +192,9 @@ class PongoClient:
         :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
         """
         return disconnect_integration(
-        public_key=self.user_id,
-        secret_key=self.secret_key,
-        id=id,
-        name=name,
-        version=self.version)
+            public_key=self.user_id,
+            secret_key=self.secret_key,
+            id=id,
+            name=name,
+            version=self.version,
+        )
