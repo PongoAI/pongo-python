@@ -40,5 +40,5 @@ def delete(
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
-    response = requests.delete(url, headers=headers, params=params)
+    response = requests.delete(url, headers=headers, params=params, timeout=120)
     return response
