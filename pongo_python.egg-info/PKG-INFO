@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: pongo-python
+Version: 0.1.0
+Summary: A Python package for interacting with the Pongo API
+Home-page: https://github.com/PongoAI/pongo-python
+Author: Caleb John
+Author-email: caleb.john@joinpongo.com
+License: Apache 2.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+
+# Pongo Python Client
+
+## To start developing run pip install -e .
+
+### Sign up for an API key at [Here](https://pongo.ai)

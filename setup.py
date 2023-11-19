@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='pongo',
+    name='pongo-python',
     version='0.1.0',
     packages=find_packages(),
     description='A Python package for interacting with the Pongo API',
@@ -15,7 +15,7 @@ setup(
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: Apache2.0 License',
         'Operating System :: OS Independent',
     ],
+    license='Apache 2.0',  # Your package's license
 )
