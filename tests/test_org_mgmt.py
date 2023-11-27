@@ -25,9 +25,18 @@ class TestSubOrg(unittest.TestCase):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.create_sub_org(
             sub_org_name="test_sub_org",
+            sub_org_id="test_sub_org_id"
         )
         assert res.status_code == 200
     
+    def test_update(self):
+        # Ensure that the client is initialized properly and connected to server
+        res = pongo_client.update_sub_org(
+            sub_org_name="test_sub_org new name@",
+            sub_org_id="test_sub_org_id"
+        )
+        assert res.status_code == 200
+        
     def test_delete(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete_sub_org(

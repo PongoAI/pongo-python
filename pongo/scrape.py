@@ -25,7 +25,7 @@ def scrape_website(
     }
     url = f"{BASE_URL}/api/{version}/scrape_website"
 
-    payload = {"sub_org_id": sub_org, "url":site_url, "source": site_name, "url": site_url}
+    payload = {"sub_org_id": sub_org, "url":site_url, "source": site_name}
 
     response = requests.post(url, headers=headers, json=payload)
     return response

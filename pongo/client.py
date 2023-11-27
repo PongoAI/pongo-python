@@ -6,7 +6,7 @@ from .integrations.disconnect_integration import disconnect_integration
 from .search import search
 from .get import get
 from .delete import delete
-from .org_management import create_sub_org, get_sub_orgs, delete_sub_org
+from .org_management import create_sub_org, get_sub_orgs, delete_sub_org, update_sub_org
 from .utils import BASE_URL
 import requests
 
@@ -226,7 +226,7 @@ class PongoClient:
         )
 
 
-    def create_sub_org(self, sub_org_name):
+    def create_sub_org(self, sub_org_name, sub_org_id):
         """
         Creates a sub org, with a given name, returns the sub org id and metadata.
         """
@@ -234,12 +234,34 @@ class PongoClient:
             public_key=self.user_id,
             secret_key=self._secret_key,
             sub_org_name=sub_org_name,
+            sub_org_id=sub_org_id,
+            version=self.version,
+        )
+    def update_sub_org(self, sub_org_id, sub_org_name):
+        """
+        Update a sub org's name
+        """
+        return update_sub_org(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            new_name=sub_org_name,
+            sub_org=sub_org_id,
             version=self.version,
         )
     
-    def get_sub_orgs(self, sub_org=None):
+    def get_sub_orgs(self):
         """
-        Retrieves a sub org by ID, or returns list of all sub orgs.
+        Returns list of all sub orgs.
+        """
+        return get_sub_orgs(
+            public_key=self.user_id,
+            secret_key=self._secret_key,
+            version=self.version,
+        )
+
+    def get_sub_org(self, sub_org):
+        """
+        Retrieves a sub org by ID
         """
         return get_sub_orgs(
             public_key=self.user_id,
