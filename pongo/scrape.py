@@ -23,7 +23,7 @@ def scrape_website(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/scrape_website"
+    url = f"{BASE_URL}/api/{version}/scrape-website"
 
     payload = {"sub_org_id": sub_org_id, "url":site_url, "source": site_name}
 

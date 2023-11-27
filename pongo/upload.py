@@ -33,7 +33,7 @@ def upload(
         "id": public_key,
     }
     payload = {}
-    url = f"{BASE_URL}/api/{version}/upload_data"
+    url = f"{BASE_URL}/api/{version}/upload-data"
 
     if type(data) == str or type(data) == list:
         payload = {
@@ -74,7 +74,7 @@ def upload_pdf(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/upload_pdf"
+    url = f"{BASE_URL}/api/{version}/upload-pdf"
 
     payload = {
         "sub_org_id": sub_org_id,

@@ -16,7 +16,7 @@ def create_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
         "sub_org_name": sub_org_name,
@@ -39,7 +39,7 @@ def get_sub_orgs(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_orgs"
+    url = f"{BASE_URL}/api/{version}/sub-orgs"
 
 
     response = requests.get(url, headers=headers)
@@ -59,7 +59,7 @@ def get_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
         "sub_org_id": sub_org_id,
@@ -86,7 +86,7 @@ def delete_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
         "sub_org_id": sub_org_id,
@@ -111,7 +111,7 @@ def update_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
         "sub_org_id": sub_org_id,
