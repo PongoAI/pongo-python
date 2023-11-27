@@ -5,7 +5,7 @@ from .utils import BASE_URL
 def get(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     doc_id=None,
     parent_id=None,
     version="v1",
@@ -28,7 +28,7 @@ def get(
         raise Exception("Cannot provide both doc_id and parent_id")
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
         "doc_id": doc_id,
         "parent_id": parent_id,
     }

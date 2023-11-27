@@ -24,7 +24,7 @@ class TestSearch(unittest.TestCase):
     def test_search_time_range(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.search(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             query="How can marchex help automotive dealerships?",
             start_time=1600223000,
             end_time=1701223034,
@@ -35,7 +35,7 @@ class TestSearch(unittest.TestCase):
     def test_search_source_list(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.search(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             query="How can marchex help automotive dealerships?",
             sources=["test_site"],
         )

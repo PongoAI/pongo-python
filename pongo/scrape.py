@@ -5,7 +5,7 @@ from .utils import BASE_URL
 def scrape_website(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     site_name,
     site_url,
     version="v1",
@@ -25,7 +25,7 @@ def scrape_website(
     }
     url = f"{BASE_URL}/api/{version}/scrape_website"
 
-    payload = {"sub_org_id": sub_org, "url":site_url, "source": site_name}
+    payload = {"sub_org_id": sub_org_id, "url":site_url, "source": site_name}
 
     response = requests.post(url, headers=headers, json=payload)
     return response

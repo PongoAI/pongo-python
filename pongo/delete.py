@@ -5,7 +5,7 @@ from .utils import BASE_URL
 def delete(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     doc_id=None,
     parent_id=None,
     website_url=None,
@@ -34,7 +34,7 @@ def delete(
         doc_id = None
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
         "doc_id": doc_id,
         "parent_id": parent_id,
     }

@@ -12,7 +12,7 @@ class TestSubOrg(unittest.TestCase):
     def test_get_one(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get_sub_orgs(
-            sub_org="db819b57-1350-4110-9d7c-063c3d49b96e",
+            sub_org_id="db819b57-1350-4110-9d7c-063c3d49b96e",
         )
         assert res.status_code == 200
     
@@ -40,7 +40,7 @@ class TestSubOrg(unittest.TestCase):
     def test_delete(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete_sub_org(
-            sub_org="e6a64705-4da9-4429-b75c-553faa987e2b",
+            sub_org_id="e6a64705-4da9-4429-b75c-553faa987e2b",
         )
         assert res.status_code == 200
 

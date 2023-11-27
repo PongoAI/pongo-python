@@ -7,7 +7,7 @@ from ..utils import BASE_URL
 def get_auth_link(
     public_key,
     secret_key,
-    id,
+    sub_org_id,
     integration_name,
     redirect_uri,
     version="v1",
@@ -25,7 +25,7 @@ def get_auth_link(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub-org/auth-link?id={id}&integration_name={integration_name}&redirect_uri={redirect_uri}"
+    url = f"{BASE_URL}/api/{version}/sub-org/auth-link?sub_org_id={sub_org_id}&integration_name={integration_name}&redirect_uri={redirect_uri}"
 
     response = requests.get(url, headers=headers)
     return response

@@ -19,7 +19,7 @@ class TestUpload(unittest.TestCase):
 
         sub_org_id = "9ce132df-4360-4c38-8a36-016cd66c678d"
         result = pongo_client.upload(
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             source_name="test",
             parent_id=doc_id,
             data=test_str_data,
@@ -35,7 +35,7 @@ class TestUpload(unittest.TestCase):
 
         sub_org_id = "db819b57-1350-4110-9d7c-063c3d49b96e"
         result = pongo_client.upload(
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             source_name="test",
             parent_id=doc_id,
             data=test_list_data,
@@ -49,7 +49,7 @@ class TestUpload(unittest.TestCase):
 
         sub_org_id = "b597bc44-d573-4b4b-83d8-6c1ec8660f3f"
         result = pongo_client.upload(
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             source_name="test",
             data=test_list_data,
             metadata=test_list_metadata,
@@ -62,7 +62,7 @@ class TestUpload(unittest.TestCase):
 
         sub_org_id = "DNE"
         result = pongo_client.upload(
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             source_name="test",
             data=test_list_data,
             metadata=test_list_metadata,
@@ -75,7 +75,7 @@ class TestUpload(unittest.TestCase):
         doc_id = "test_pdf_id"
         sub_org_id = "9ce132df-4360-4c38-8a36-016cd66c678d"
         result = pongo_client.upload_pdf(
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             source_name="test",
             parent_id=doc_id,
             file_path=test_pdf_path,

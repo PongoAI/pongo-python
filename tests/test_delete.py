@@ -14,7 +14,7 @@ class TestDelete(unittest.TestCase):
     def test_single(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             doc_id="06e1b73b-6953-33a4-bdd0-7e2854b94c0f",
         )
 
@@ -24,7 +24,7 @@ class TestDelete(unittest.TestCase):
     def test_get_parent(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             parent_id="b11f2e55-0ad7-428b-9813-2d78e9e3009d",
         )
 

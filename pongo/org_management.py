@@ -49,7 +49,7 @@ def get_sub_orgs(
 def get_sub_org(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     version="v1",
 ):
     """
@@ -62,7 +62,7 @@ def get_sub_org(
     url = f"{BASE_URL}/api/{version}/sub_org"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
@@ -73,7 +73,7 @@ def get_sub_org(
 def delete_sub_org(
         public_key,
         secret_key,
-        sub_org,
+        sub_org_id,
         version="v1",
 ):
     """
@@ -89,7 +89,7 @@ def delete_sub_org(
     url = f"{BASE_URL}/api/{version}/sub_org"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
@@ -100,7 +100,7 @@ def delete_sub_org(
 def update_sub_org(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     new_name,
     version="v1",
 ):
@@ -114,7 +114,7 @@ def update_sub_org(
     url = f"{BASE_URL}/api/{version}/sub_org"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
         "new_name": new_name
     }
 

@@ -45,7 +45,7 @@ class PongoClient:
 
     def search(
         self,
-        sub_org,
+        sub_org_id,
         query,
         start_time=None,
         end_time=None,
@@ -60,7 +60,7 @@ class PongoClient:
         return search(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             query=query,
             sources=sources,
             start_time=start_time,
@@ -70,7 +70,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def get(self, sub_org, doc_id=None, parent_id=None):
+    def get(self, sub_org_id, doc_id=None, parent_id=None):
         """
         Retrieves a single document chunk or a list of document chunks from the Pongo API.
         :param doc_id: ID of the document to be retrieved.
@@ -79,18 +79,18 @@ class PongoClient:
         return get(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
             version=self.version,
         )
 
     def upload(
-        self, sub_org, source_name, data, parent_id=None, metadata={}, timestamp=None
+        self, sub_org_id, source_name, data, parent_id=None, metadata={}, timestamp=None
     ):
         """
         Uploads a data to pongo for semantic search.
-        :param sub_org: Sub organization of the data.
+        :param sub_org_id: Sub organization of the data.
         :param source_name: Name of the source of the data.
         :param data: Data to be uploaded. Can be a single string or a list of strings.
         :param metadata: Metadata for the data. Can be a single dictionary or a list of dictionaries.
@@ -101,7 +101,7 @@ class PongoClient:
         return upload(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             source_name=source_name,
             data=data,
             metadata=metadata,
@@ -111,11 +111,11 @@ class PongoClient:
         )
     
     def upload_pdf(
-        self, sub_org, source_name, file_path, parent_id=None, metadata={}, timestamp=None
+        self, sub_org_id, source_name, file_path, parent_id=None, metadata={}, timestamp=None
     ):
         """
         Uploads a pdf to pongo for semantic search.
-        :param sub_org: Sub organization of the data.
+        :param sub_org_id: Sub organization of the data.
         :param source_name: Name of the source of the data.
         :param data: Data to be uploaded. Can be a single string or a list of strings.
         :param metadata: Metadata for the data. Can be a single dictionary or a list of dictionaries.
@@ -126,7 +126,7 @@ class PongoClient:
         return upload_pdf(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             source_name=source_name,
             file_path=file_path,
             metadata=metadata,
@@ -135,7 +135,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def delete(self, sub_org, doc_id=None, parent_id=None):
+    def delete(self, sub_org_id, doc_id=None, parent_id=None):
         """
         Deletes a single document chunk or a list of document chunks from the Pongo API.
         :param doc_id: ID of the document to be deleted.
@@ -144,16 +144,16 @@ class PongoClient:
         return delete(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
             version=self.version,
         )
 
-    def scrape_website(self, sub_org, site_name, site_url):
+    def scrape_website(self, sub_org_id, site_name, site_url):
         """
         Uploads a data to pongo for semantic search.
-        :param sub_org: Sub organization of the data.
+        :param sub_org_id: Sub organization of the data.
         :param source_name: Name of the source of the data.
         :param data: Data to be uploaded. Can be a single string or a list of strings.
         :param metadata: Metadata for the data. Can be a single dictionary or a list of dictionaries.
@@ -164,17 +164,17 @@ class PongoClient:
         return scrape_website(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             site_name=site_name,
             site_url=site_url,
             version=self.version,
         )
 
-    def get_auth_link(self, id, integration_name, redirect_uri):
+    def get_auth_link(self, sub_org_id, integration_name, redirect_uri):
         """
         Generates a link that sub-organizations can use to authenticate with other platforms and have their data ingested by Pongo.
 
-        :param id: ID of the sub-organization to generate a link for
+        :param sub_org_id: ID of the sub-organization to generate a link for
         :param integration_name: Name of the integration to authenticate with
         :param redirect_uri: The address users will be sent to after completing the authentication process- wether successful or unsuccessful.
         :return: Response from the server containing the authentication link or error message.
@@ -182,7 +182,7 @@ class PongoClient:
         return get_auth_link(
             public_key=self.user_id,
             secret_key=self.secret_key,
-            id=id,
+            sub_org_id=sub_org_id,
             integration_name=integration_name,
             redirect_uri=redirect_uri,
             version=self.version,
@@ -207,21 +207,21 @@ class PongoClient:
 
     def disconnect_integration(
         self,
-        id,
-        name,
+        integration_id,
+        integration_name,
     ):
         """
         Disconnect an integration and delete all of its data
 
-        :param id: ID of the integration to delete
+        :param integration_id: ID of the integration to delete
         :param name: Name of the integration to delete
         :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
         """
         return disconnect_integration(
             public_key=self.user_id,
             secret_key=self.secret_key,
-            id=id,
-            name=name,
+            integration_id=integration_id,
+            integration_name=integration_name,
             version=self.version,
         )
 
@@ -245,7 +245,7 @@ class PongoClient:
             public_key=self.user_id,
             secret_key=self._secret_key,
             new_name=sub_org_name,
-            sub_org=sub_org_id,
+            sub_org_id=sub_org_id,
             version=self.version,
         )
     
@@ -259,19 +259,19 @@ class PongoClient:
             version=self.version,
         )
 
-    def get_sub_org(self, sub_org):
+    def get_sub_org(self, sub_org_id):
         """
         Retrieves a sub org by ID
         """
         return get_sub_orgs(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             version=self.version,
         )
     
 
-    def delete_sub_org(self, sub_org):
+    def delete_sub_org(self, sub_org_id):
         """
         Delete a sub org by ID.
         Will also delete all data associated with the sub org.
@@ -279,6 +279,6 @@ class PongoClient:
         return delete_sub_org(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            sub_org=sub_org,
+            sub_org_id=sub_org_id,
             version=self.version,
         )

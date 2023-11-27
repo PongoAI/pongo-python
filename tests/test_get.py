@@ -14,7 +14,7 @@ class TestGet(unittest.TestCase):
     def test_single(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             doc_id="8b8a322c-31e2-3283-9838-a3dc1fe4de85",
         )
 
@@ -23,7 +23,7 @@ class TestGet(unittest.TestCase):
     def test_get_parent(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
-            sub_org="9ce132df-4360-4c38-8a36-016cd66c678d",
+            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
             parent_id="64d83ed3-c875-4677-b95b-a8c7bf716882",
         )
 
