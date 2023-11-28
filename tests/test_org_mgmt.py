@@ -3,7 +3,7 @@ import pongo
 from dotenv import load_dotenv
 import os
 
-# load_dotenv()
+load_dotenv()
 
 PONGO_PUBLIC = os.getenv("PONGO_PUBLIC")
 PONGO_SECRET = os.getenv("PONGO_SECRET")
