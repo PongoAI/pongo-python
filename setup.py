@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pongo-python',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(),
     description='A Python package for interacting with the Pongo API',
     long_description=open('README.md').read(),
