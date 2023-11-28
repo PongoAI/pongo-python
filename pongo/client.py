@@ -181,7 +181,7 @@ class PongoClient:
         """
         return get_auth_link(
             public_key=self.user_id,
-            secret_key=self.secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             integration_name=integration_name,
             redirect_uri=redirect_uri,
@@ -199,7 +199,7 @@ class PongoClient:
         """
         return update_drive_directories(
             public_key=self.user_id,
-            secret_key=self.secret_key,
+            secret_key=self._secret_key,
             new_dirs=new_dirs,
             integration_id=integration_id,
             version=self.version,
@@ -219,7 +219,7 @@ class PongoClient:
         """
         return disconnect_integration(
             public_key=self.user_id,
-            secret_key=self.secret_key,
+            secret_key=self._secret_key,
             integration_id=integration_id,
             integration_name=integration_name,
             version=self.version,
