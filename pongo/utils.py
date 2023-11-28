@@ -1,2 +1,2 @@
 
-BASE_URL = "Http://localhost:8000"
+BASE_URL = "https://api.joinpongo.com"
