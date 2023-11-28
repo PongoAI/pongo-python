@@ -6,7 +6,6 @@ def create_sub_org(
     public_key,
     secret_key,
     sub_org_name,
-    sub_org_id,
     version="v1",
 ):
     """
@@ -20,7 +19,6 @@ def create_sub_org(
 
     payload = {
         "sub_org_name": sub_org_name,
-        "sub_org_id": sub_org_id
     }
 
     response = requests.post(url, headers=headers, json=payload)
@@ -101,7 +99,7 @@ def update_sub_org(
     public_key,
     secret_key,
     sub_org_id,
-    new_name,
+    sub_org_name,
     version="v1",
 ):
     """
@@ -115,7 +113,7 @@ def update_sub_org(
 
     payload = {
         "sub_org_id": sub_org_id,
-        "new_name": new_name
+        "sub_org_name": sub_org_name
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}

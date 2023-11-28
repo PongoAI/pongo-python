@@ -226,7 +226,7 @@ class PongoClient:
         )
 
 
-    def create_sub_org(self, sub_org_name, sub_org_id):
+    def create_sub_org(self, sub_org_name):
         """
         Creates a sub org, with a given name, returns the sub org id and metadata.
         """
@@ -234,7 +234,6 @@ class PongoClient:
             public_key=self.user_id,
             secret_key=self._secret_key,
             sub_org_name=sub_org_name,
-            sub_org_id=sub_org_id,
             version=self.version,
         )
     def update_sub_org(self, sub_org_id, sub_org_name):
@@ -244,7 +243,7 @@ class PongoClient:
         return update_sub_org(
             public_key=self.user_id,
             secret_key=self._secret_key,
-            new_name=sub_org_name,
+            sub_org_name=sub_org_name,
             sub_org_id=sub_org_id,
             version=self.version,
         )

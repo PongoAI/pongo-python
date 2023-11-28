@@ -3,16 +3,17 @@ import pongo
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+# load_dotenv()
 
 PONGO_PUBLIC = os.getenv("PONGO_PUBLIC")
 PONGO_SECRET = os.getenv("PONGO_SECRET")
+
 pongo_client = pongo.PongoClient(PONGO_PUBLIC, PONGO_SECRET)
 class TestSubOrg(unittest.TestCase):
     def test_get_one(self):
         # Ensure that the client is initialized properly and connected to server
-        res = pongo_client.get_sub_orgs(
-            sub_org_id="db819b57-1350-4110-9d7c-063c3d49b96e",
+        res = pongo_client.get_sub_org(
+            sub_org_id="4d32dbd3-da6a-451e-8d8c-0dd418b49779",
         )
         assert res.status_code == 200
     
@@ -24,23 +25,22 @@ class TestSubOrg(unittest.TestCase):
     def test_create(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.create_sub_org(
-            sub_org_name="test_sub_org",
-            sub_org_id="test_sub_org_id"
+            sub_org_name="test_sub_org 1",
         )
         assert res.status_code == 200
     
     def test_update(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.update_sub_org(
-            sub_org_name="test_sub_org new name@",
-            sub_org_id="test_sub_org_id"
+            sub_org_name="yeehaw boys",
+            sub_org_id="4d32dbd3-da6a-451e-8d8c-0dd418b49779"
         )
         assert res.status_code == 200
         
     def test_delete(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete_sub_org(
-            sub_org_id="e6a64705-4da9-4429-b75c-553faa987e2b",
+            sub_org_id="4a2862e0-0260-4474-b534-1ac8f9b1db0a",
         )
         assert res.status_code == 200
 
