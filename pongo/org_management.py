@@ -15,7 +15,7 @@ def create_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
         "sub_org_name": sub_org_name,
@@ -28,20 +28,39 @@ def create_sub_org(
 def get_sub_orgs(
     public_key,
     secret_key,
-    sub_org=None,
     version="v1",
 ):
     """
-    Retrieves a sub org by ID, or returns list of all sub orgs.
+    Returns list of all sub orgs.
     """
     headers = {
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-orgs"
+
+
+    response = requests.get(url, headers=headers)
+    return response
+
+
+def get_sub_org(
+    public_key,
+    secret_key,
+    sub_org_id,
+    version="v1",
+):
+    """
+    Retrieves a sub org by ID
+    """
+    headers = {
+        "secret": secret_key,
+        "id": public_key,
+    }
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
@@ -52,7 +71,7 @@ def get_sub_orgs(
 def delete_sub_org(
         public_key,
         secret_key,
-        sub_org,
+        sub_org_id,
         version="v1",
 ):
     """
@@ -65,12 +84,38 @@ def delete_sub_org(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/sub_org"
+    url = f"{BASE_URL}/api/{version}/sub-org"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
     response = requests.delete(url, headers=headers, params=params, timeout=120)
+    return response
+
+
+def update_sub_org(
+    public_key,
+    secret_key,
+    sub_org_id,
+    sub_org_name,
+    version="v1",
+):
+    """
+    Update a sub-organization's name
+    """
+    headers = {
+        "secret": secret_key,
+        "id": public_key,
+    }
+    url = f"{BASE_URL}/api/{version}/sub-org"
+
+    payload = {
+        "sub_org_id": sub_org_id,
+        "sub_org_name": sub_org_name
+    }
+
+    params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
+    response = requests.put(url, headers=headers, json=params)
     return response

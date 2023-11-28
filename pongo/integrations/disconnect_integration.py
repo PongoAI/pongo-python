@@ -7,8 +7,8 @@ from ..utils import BASE_URL
 def disconnect_integration(
     public_key,
     secret_key,
-    id,
-    name,
+    integration_id,
+    integration_name,
     version="v1",
 ):
     """
@@ -26,5 +26,5 @@ def disconnect_integration(
 
     url = f"{BASE_URL}/api/{version}/org/disconnect-integration"
 
-    response = requests.post(url, headers=headers, json={'id': id, 'name': name})
+    response = requests.post(url, headers=headers, json={'integration_id': integration_id, 'integration_name': integration_name})
     return response

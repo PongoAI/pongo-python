@@ -11,7 +11,7 @@ MAX_FILE_SIZE = 20 * 1024 * 1024
 def upload(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     source_name,
     data,
     metadata={},
@@ -33,11 +33,11 @@ def upload(
         "id": public_key,
     }
     payload = {}
-    url = f"{BASE_URL}/api/{version}/upload_data"
+    url = f"{BASE_URL}/api/{version}/upload-data"
 
     if type(data) == str or type(data) == list:
         payload = {
-            "sub_org_id": sub_org,
+            "sub_org_id": sub_org_id,
             "source": source_name,
             "data": data,
             "metadata": metadata,
@@ -58,7 +58,7 @@ def upload(
 def upload_pdf(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     source_name,
     file_path,
     metadata={},
@@ -74,10 +74,10 @@ def upload_pdf(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/upload_pdf"
+    url = f"{BASE_URL}/api/{version}/upload-pdf"
 
     payload = {
-        "organization_id": sub_org,
+        "sub_org_id": sub_org_id,
         "source": source_name,
         "metadata": metadata,
         "timestamp": timestamp,

@@ -5,7 +5,7 @@ from .utils import BASE_URL
 def search(
     public_key,
     secret_key,
-    sub_org,
+    sub_org_id,
     query,
     num_results=15,
     max_reranker_results=5,
@@ -25,7 +25,7 @@ def search(
     url = f"{BASE_URL}/api/{version}/search"
 
     payload = {
-        "sub_org_id": sub_org,
+        "sub_org_id": sub_org_id,
         "query": query,
         "sources": sources,
         "start_time": start_time,
