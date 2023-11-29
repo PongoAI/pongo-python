@@ -19,7 +19,7 @@ def get(
         "secret": secret_key,
         "id": public_key,
     }
-    url = f"{BASE_URL}/api/{version}/get_data"
+    url = f"{BASE_URL}/api/{version}/data"
 
     if not doc_id and not parent_id:
         raise Exception("Must provide either doc_id or parent_id")

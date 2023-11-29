@@ -22,7 +22,9 @@ class PongoClient:
         self._secret_key = secret_key
         self.version = version
 
-        url = f"{BASE_URL}/api/{self.version}/authorize_user"
+
+
+        url = f"{BASE_URL}/api/{self.version}/authorize_user" 
         headers = {"secret": self._secret_key, "id": self.user_id}
         response = requests.get(url, headers=headers)
 
