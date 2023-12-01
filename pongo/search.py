@@ -5,8 +5,8 @@ from .utils import BASE_URL
 def search(
     public_key,
     secret_key,
-    sub_org_id,
     query,
+    sub_org_id=None,
     num_results=15,
     max_reranker_results=5,
     start_time=None,

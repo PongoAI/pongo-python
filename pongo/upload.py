@@ -11,9 +11,9 @@ MAX_FILE_SIZE = 20 * 1024 * 1024
 def upload(
     public_key,
     secret_key,
-    sub_org_id,
     source_name,
     data,
+    sub_org_id=None,
     metadata={},
     parent_id=None,
     timestamp=None,
@@ -58,9 +58,9 @@ def upload(
 def upload_pdf(
     public_key,
     secret_key,
-    sub_org_id,
     source_name,
     file_path,
+    sub_org_id=None,
     metadata={},
     parent_id=None,
     timestamp=None,
@@ -98,8 +98,9 @@ def upload_pdf(
             )
 
         file_name = os.path.basename(file_path)
-
-        files = [("file", (file_name, open(file_path, "rb"), "application/pdf"))]
-        return requests.request("POST", url, headers=headers, data=payload, files=files)
+        with open(file_path, "rb") as pdf_file:
+            files = [("file", (file_name, pdf_file, "application/pdf"))]
+            response = requests.request("POST", url, headers=headers, data=payload, files=files)
+        return response
     else:
         raise ValueError("Provided file is not a PDF.")

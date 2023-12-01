@@ -5,10 +5,10 @@ from .utils import BASE_URL
 def scrape_website(
     public_key,
     secret_key,
-    sub_org_id,
     site_name,
     site_url,
     version="v1",
+    sub_org_id=None,
 ):
     """
     Uploads a file to a specified URL using provided credentials.
