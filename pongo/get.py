@@ -5,7 +5,7 @@ from .utils import BASE_URL
 def get(
     public_key,
     secret_key,
-    sub_org_id,
+    sub_org_id=None,
     doc_id=None,
     parent_id=None,
     version="v1",

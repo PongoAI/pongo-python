@@ -47,8 +47,8 @@ class PongoClient:
 
     def search(
         self,
-        sub_org_id,
         query,
+        sub_org_id=None,
         start_time=None,
         end_time=None,
         sources=[],
@@ -72,7 +72,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def get(self, sub_org_id, doc_id=None, parent_id=None):
+    def get(self, sub_org_id=None, doc_id=None, parent_id=None):
         """
         Retrieves a single document chunk or a list of document chunks from the Pongo API.
         :param doc_id: ID of the document to be retrieved.
@@ -88,7 +88,7 @@ class PongoClient:
         )
 
     def upload(
-        self, sub_org_id, source_name, data, parent_id=None, metadata={}, timestamp=None
+        self,  source_name, data,sub_org_id=None, parent_id=None, metadata={}, timestamp=None
     ):
         """
         Uploads a data to pongo for semantic search.
@@ -113,7 +113,7 @@ class PongoClient:
         )
     
     def upload_pdf(
-        self, sub_org_id, source_name, file_path, parent_id=None, metadata={}, timestamp=None
+        self,  source_name, file_path,sub_org_id=None, parent_id=None, metadata={}, timestamp=None
     ):
         """
         Uploads a pdf to pongo for semantic search.
@@ -137,7 +137,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def delete(self, sub_org_id, doc_id=None, parent_id=None):
+    def delete(self, sub_org_id=None, doc_id=None, parent_id=None):
         """
         Deletes a single document chunk or a list of document chunks from the Pongo API.
         :param doc_id: ID of the document to be deleted.
@@ -152,7 +152,7 @@ class PongoClient:
             version=self.version,
         )
 
-    def scrape_website(self, sub_org_id, site_name, site_url):
+    def scrape_website(self,  site_name, site_url, sub_org_id=None):
         """
         Uploads a data to pongo for semantic search.
         :param sub_org_id: Sub organization of the data.
