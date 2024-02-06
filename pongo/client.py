@@ -12,20 +12,19 @@ import requests
 
 
 class PongoClient:
-    def __init__(self, user_id, secret_key, version="v1"):
+    def __init__(self, secret_key, version="v1"):
         """
         Initializes a PongoClient object.
         :param user_id: User ID. This looks like pongo_public_....
         :param secret_key: Secret key. This looks like pongo_secret_*****
         """
-        self.user_id = user_id
         self._secret_key = secret_key
         self.version = version
 
 
 
         url = f"{BASE_URL}/api/{self.version}/authorize_user" 
-        headers = {"secret": self._secret_key, "id": self.user_id}
+        headers = {"secret": self._secret_key}
         response = requests.get(url, headers=headers)
 
         if response.status_code == 401:
@@ -35,7 +34,7 @@ class PongoClient:
 
     def heartbeat(self):
         url = f"{BASE_URL}/api/{self.version}/authorize_user"
-        headers = {"secret": self._secret_key, "id": self.user_id}
+        headers = {"secret": self._secret_key}
         response = requests.get(url, headers=headers)
 
         if response.status_code == 401:
@@ -60,8 +59,7 @@ class PongoClient:
         OPTIONAL: start_time, end_time, sources
         """
         return search(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             query=query,
             sources=sources,
@@ -79,8 +77,7 @@ class PongoClient:
         :param parent_id: ID of the parent document to be retrieved. Will return all chunks of the parent document.
         """
         return get(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
@@ -101,8 +98,7 @@ class PongoClient:
         """
 
         return upload(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             data=data,
             metadata=metadata,
@@ -124,8 +120,7 @@ class PongoClient:
         """
 
         return upload_pdf(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             source_name=source_name,
             file_path=file_path,
@@ -142,8 +137,7 @@ class PongoClient:
         :param parent_id: ID of the parent document to be deleted. Will delete all chunks of the parent document.
         """
         return delete(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
@@ -162,8 +156,7 @@ class PongoClient:
         """
 
         return scrape_website(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             site_name=site_name,
             site_url=site_url,
@@ -180,8 +173,7 @@ class PongoClient:
         :return: Response from the server containing the authentication link or error message.
         """
         return get_auth_link(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             integration_name=integration_name,
             redirect_uri=redirect_uri,
@@ -198,8 +190,7 @@ class PongoClient:
         :return: Response from the server containing the authentication link or error message.
         """
         return update_drive_directories(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             new_dirs=new_dirs,
             integration_id=integration_id,
             version=self.version,
@@ -218,8 +209,7 @@ class PongoClient:
         :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
         """
         return disconnect_integration(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             integration_id=integration_id,
             integration_name=integration_name,
             version=self.version,
@@ -231,8 +221,7 @@ class PongoClient:
         Creates a sub org, with a given name, returns the sub org id and metadata.
         """
         return create_sub_org(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_name=sub_org_name,
             version=self.version,
         )
@@ -241,8 +230,7 @@ class PongoClient:
         Update a sub org's name
         """
         return update_sub_org(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_name=sub_org_name,
             sub_org_id=sub_org_id,
             version=self.version,
@@ -253,8 +241,7 @@ class PongoClient:
         Returns list of all sub orgs.
         """
         return get_sub_orgs(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             version=self.version,
         )
 
@@ -263,8 +250,7 @@ class PongoClient:
         Retrieves a sub org by ID
         """
         return get_sub_orgs(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             version=self.version,
         )
@@ -276,8 +262,7 @@ class PongoClient:
         Will also delete all data associated with the sub org.
         """
         return delete_sub_org(
-            public_key=self.user_id,
-            secret_key=self._secret_key,
+secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             version=self.version,
         )
