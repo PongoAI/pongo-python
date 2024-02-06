@@ -9,7 +9,6 @@ MAX_FILE_SIZE = 20 * 1024 * 1024
 
 
 def upload(
-    public_key,
     secret_key,
     data,
     sub_org_id=None,
@@ -28,7 +27,6 @@ def upload(
 
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     payload = {}
     url = f"{BASE_URL}/api/{version}/upload-data"
@@ -44,19 +42,23 @@ def upload(
         raise ValueError("Data must be a string or a list of strings.")
 
     if type(metadata) == dict:
-        if 'parent_id' not in metadata:
+        if "parent_id" not in metadata:
             raise ValueError("Metadata must contain a parent_id.")
-        
-        if 'source' not in metadata:
+
+        if "source" not in metadata:
             raise ValueError("Metadata must contain a source.")
-    
+
     elif type(metadata) == list:
         for indx, meta in enumerate(metadata):
-            if 'parent_id' not in meta:
-                raise ValueError(f"Metadata must contain a parent_id. Missing at index {indx}.")
-            
-            if 'source' not in meta:
-                raise ValueError(f"Metadata must contain a source. Missing at index {indx}.")
+            if "parent_id" not in meta:
+                raise ValueError(
+                    f"Metadata must contain a parent_id. Missing at index {indx}."
+                )
+
+            if "source" not in meta:
+                raise ValueError(
+                    f"Metadata must contain a source. Missing at index {indx}."
+                )
     else:
         raise ValueError("Metadata must be a dictionary or a list of dictionaries.")
 
@@ -68,7 +70,6 @@ def upload(
 
 
 def upload_pdf(
-    public_key,
     secret_key,
     source_name,
     file_path,
@@ -84,7 +85,6 @@ def upload_pdf(
 
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/upload-pdf"
 
@@ -112,7 +112,9 @@ def upload_pdf(
         file_name = os.path.basename(file_path)
         with open(file_path, "rb") as pdf_file:
             files = [("file", (file_name, pdf_file, "application/pdf"))]
-            response = requests.request("POST", url, headers=headers, data=payload, files=files)
+            response = requests.request(
+                "POST", url, headers=headers, data=payload, files=files
+            )
         return response
     else:
         raise ValueError("Provided file is not a PDF.")

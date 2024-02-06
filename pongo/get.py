@@ -3,7 +3,6 @@ from .utils import BASE_URL
 
 
 def get(
-    public_key,
     secret_key,
     sub_org_id=None,
     doc_id=None,
@@ -17,7 +16,6 @@ def get(
     """
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/data"
 
@@ -33,6 +31,10 @@ def get(
         "parent_id": parent_id,
     }
 
-    params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
+    params = {
+        key: value if not isinstance(value, list) else ",".join(value)
+        for key, value in payload.items()
+        if value is not None
+    }
     response = requests.get(url, headers=headers, params=params)
     return response

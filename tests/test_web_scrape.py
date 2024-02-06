@@ -5,9 +5,9 @@ import os
 
 load_dotenv()
 
-PONGO_PUBLIC = os.getenv("PONGO_PUBLIC")
+
 PONGO_SECRET = os.getenv("PONGO_SECRET")
-pongo_client = pongo.PongoClient(PONGO_PUBLIC, PONGO_SECRET)
+pongo_client = pongo.PongoClient(PONGO_SECRET)
 
 
 class TestWebScrape(unittest.TestCase):
@@ -20,8 +20,6 @@ class TestWebScrape(unittest.TestCase):
         )
 
         assert res.status_code == 200
-
-
 
 
 if __name__ == "__main__":

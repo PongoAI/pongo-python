@@ -3,7 +3,6 @@ from .utils import BASE_URL
 
 
 def delete(
-    public_key,
     secret_key,
     sub_org_id=None,
     doc_id=None,
@@ -18,7 +17,6 @@ def delete(
     """
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/data"
 
@@ -27,7 +25,7 @@ def delete(
 
     if doc_id and parent_id and website_url:
         raise Exception("Cannot provide both doc_id and parent_id")
-    
+
     parent_id = parent_id
     if website_url:
         parent_id = website_url
@@ -39,6 +37,10 @@ def delete(
         "parent_id": parent_id,
     }
 
-    params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}
+    params = {
+        key: value if not isinstance(value, list) else ",".join(value)
+        for key, value in payload.items()
+        if value is not None
+    }
     response = requests.delete(url, headers=headers, params=params, timeout=120)
     return response
