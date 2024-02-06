@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-PONGO_SECRET = 'b673c3618293453687ae9c2865f33c4d'#os.getenv("PONGO_SECRET")
+PONGO_SECRET = os.getenv("PONGO_SECRET")
 
 pongo_client = pongo.PongoClient(PONGO_SECRET)
 
