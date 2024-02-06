@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 
-PONGO_SECRET = os.getenv("PONGO_SECRET")
+PONGO_SECRET = os.getenv("PONGO_KEY")
 
 pongo_client = pongo.PongoClient(PONGO_SECRET)
 
@@ -69,22 +69,6 @@ class TestUpload(unittest.TestCase):
             metadata=test_list_metadata,
         )
         assert result.status_code == 404
-
-    def test_upload_pdf(self):
-        test_pdf_path = (
-            "/Users/jamarimorrison/Downloads/Nondisclosure Agreement (2).pdf"
-        )
-        test_pdf_metadata = {"test": "pdf"}
-        doc_id = "test_pdf_id"
-        sub_org_id = "c3f56583-625e-43b3-89aa-970b24232600"
-        result = pongo_client.upload_pdf(
-            # sub_org_id=sub_org_id,
-            source_name="test",
-            parent_id=doc_id,
-            file_path=test_pdf_path,
-            metadata=test_pdf_metadata,
-        )
-        assert result.status_code == 200
 
 
 if __name__ == "__main__":

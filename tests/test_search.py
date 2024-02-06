@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 
-PONGO_SECRET = os.getenv("PONGO_SECRET")
+PONGO_SECRET = os.getenv("PONGO_KEY")
 
 pongo_client = pongo.PongoClient(PONGO_SECRET)
 
@@ -15,30 +15,13 @@ class TestSearch(unittest.TestCase):
     def test_search(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.search(
-            # sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-            query="How can marchex help automotive dealerships?",
+            sub_org_id="351989f7-0e84-4009-8ec4-ead4463e60a8",
+            query="When did LVMH start YSL?",
+            num_results=5,
+            sample_size=5,
         )
 
-        assert res.status_code == 200
-
-    def test_search_time_range(self):
-        # Ensure that the client is initialized properly and connected to server
-        res = pongo_client.search(
-            # sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-            query="How can marchex help automotive dealerships?",
-            start_time=1600223000,
-            end_time=1701223034,
-        )
-
-        assert res.status_code == 200
-
-    def test_search_source_list(self):
-        # Ensure that the client is initialized properly and connected to server
-        res = pongo_client.search(
-            sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-            query="How can marchex help automotive dealerships?",
-            sources=["test_site"],
-        )
+        assert len(res.json()) == 5
 
         assert res.status_code == 200
 

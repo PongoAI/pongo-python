@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 
-PONGO_SECRET = os.getenv("PONGO_SECRET")
+PONGO_SECRET = os.getenv("PONGO_KEY")
 
 
 class TestAuth(unittest.TestCase):
