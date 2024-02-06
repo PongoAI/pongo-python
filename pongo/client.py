@@ -21,9 +21,7 @@ class PongoClient:
         self._secret_key = secret_key
         self.version = version
 
-
-
-        url = f"{BASE_URL}/api/{self.version}/authorize_user" 
+        url = f"{BASE_URL}/api/{self.version}/authorize_user"
         headers = {"secret": self._secret_key}
         response = requests.get(url, headers=headers)
 
@@ -59,7 +57,7 @@ class PongoClient:
         OPTIONAL: start_time, end_time, sources
         """
         return search(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             query=query,
             sources=sources,
@@ -77,16 +75,14 @@ secret_key=self._secret_key,
         :param parent_id: ID of the parent document to be retrieved. Will return all chunks of the parent document.
         """
         return get(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
             version=self.version,
         )
 
-    def upload(
-        self, data,sub_org_id=None, metadata={}, timestamp=None
-    ):
+    def upload(self, data, sub_org_id=None, metadata={}, timestamp=None):
         """
         Uploads a data to pongo for semantic search.
         :param sub_org_id: Sub organization of the data.
@@ -98,16 +94,22 @@ secret_key=self._secret_key,
         """
 
         return upload(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             data=data,
             metadata=metadata,
             timestamp=timestamp,
             version=self.version,
         )
-    
+
     def upload_pdf(
-        self,  source_name, file_path,sub_org_id=None, parent_id=None, metadata={}, timestamp=None
+        self,
+        source_name,
+        file_path,
+        sub_org_id=None,
+        parent_id=None,
+        metadata={},
+        timestamp=None,
     ):
         """
         Uploads a pdf to pongo for semantic search.
@@ -120,7 +122,7 @@ secret_key=self._secret_key,
         """
 
         return upload_pdf(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             source_name=source_name,
             file_path=file_path,
@@ -137,14 +139,14 @@ secret_key=self._secret_key,
         :param parent_id: ID of the parent document to be deleted. Will delete all chunks of the parent document.
         """
         return delete(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             doc_id=doc_id,
             parent_id=parent_id,
             version=self.version,
         )
 
-    def scrape_website(self,  site_name, site_url, sub_org_id=None):
+    def scrape_website(self, site_name, site_url, sub_org_id=None):
         """
         Uploads a data to pongo for semantic search.
         :param sub_org_id: Sub organization of the data.
@@ -156,7 +158,7 @@ secret_key=self._secret_key,
         """
 
         return scrape_website(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             site_name=site_name,
             site_url=site_url,
@@ -173,7 +175,7 @@ secret_key=self._secret_key,
         :return: Response from the server containing the authentication link or error message.
         """
         return get_auth_link(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             integration_name=integration_name,
             redirect_uri=redirect_uri,
@@ -190,7 +192,7 @@ secret_key=self._secret_key,
         :return: Response from the server containing the authentication link or error message.
         """
         return update_drive_directories(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             new_dirs=new_dirs,
             integration_id=integration_id,
             version=self.version,
@@ -209,39 +211,39 @@ secret_key=self._secret_key,
         :return: Response from the server which may contain a disconnect link for the end user, depending on the integration.
         """
         return disconnect_integration(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             integration_id=integration_id,
             integration_name=integration_name,
             version=self.version,
         )
-
 
     def create_sub_org(self, sub_org_name):
         """
         Creates a sub org, with a given name, returns the sub org id and metadata.
         """
         return create_sub_org(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_name=sub_org_name,
             version=self.version,
         )
+
     def update_sub_org(self, sub_org_id, sub_org_name):
         """
         Update a sub org's name
         """
         return update_sub_org(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_name=sub_org_name,
             sub_org_id=sub_org_id,
             version=self.version,
         )
-    
+
     def get_sub_orgs(self):
         """
         Returns list of all sub orgs.
         """
         return get_sub_orgs(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             version=self.version,
         )
 
@@ -250,11 +252,10 @@ secret_key=self._secret_key,
         Retrieves a sub org by ID
         """
         return get_sub_orgs(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             version=self.version,
         )
-    
 
     def delete_sub_org(self, sub_org_id):
         """
@@ -262,7 +263,7 @@ secret_key=self._secret_key,
         Will also delete all data associated with the sub org.
         """
         return delete_sub_org(
-secret_key=self._secret_key,
+            secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             version=self.version,
         )

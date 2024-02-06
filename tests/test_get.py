@@ -15,11 +15,11 @@ class TestGet(unittest.TestCase):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
             # sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-             doc_id="be738d73-3326-35bb-825c-9b59a489bace",
+            doc_id="be738d73-3326-35bb-825c-9b59a489bace",
         )
 
         assert res.status_code == 200
-    
+
     def test_get_parent(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
@@ -28,10 +28,6 @@ class TestGet(unittest.TestCase):
         )
 
         assert res.status_code == 200
-
-
-
-
 
 
 if __name__ == "__main__":

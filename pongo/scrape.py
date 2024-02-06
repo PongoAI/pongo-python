@@ -3,7 +3,6 @@ from .utils import BASE_URL
 
 
 def scrape_website(
-    public_key,
     secret_key,
     site_name,
     site_url,
@@ -21,11 +20,10 @@ def scrape_website(
 
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/scrape-website"
 
-    payload = {"sub_org_id": sub_org_id, "url":site_url, "source": site_name}
+    payload = {"sub_org_id": sub_org_id, "url": site_url, "source": site_name}
 
     response = requests.post(url, headers=headers, json=payload)
     return response

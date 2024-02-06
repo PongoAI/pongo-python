@@ -5,7 +5,6 @@ from ..utils import BASE_URL
 
 
 def update_drive_directories(
-    public_key,
     secret_key,
     new_dirs,
     integration_id,
@@ -22,9 +21,12 @@ def update_drive_directories(
 
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/google-drive/update-dirs"
 
-    response = requests.post(url, headers=headers, json={'new_dirs': new_dirs, 'integration_id': integration_id})
+    response = requests.post(
+        url,
+        headers=headers,
+        json={"new_dirs": new_dirs, "integration_id": integration_id},
+    )
     return response

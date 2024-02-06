@@ -20,7 +20,7 @@ class TestDelete(unittest.TestCase):
 
         print(res.json())
         assert res.status_code == 200
-    
+
     def test_delete_parent(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.delete(
@@ -30,10 +30,6 @@ class TestDelete(unittest.TestCase):
 
         print(res.json())
         assert res.status_code == 200
-
-
-
-
 
 
 if __name__ == "__main__":

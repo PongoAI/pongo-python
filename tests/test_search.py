@@ -20,8 +20,7 @@ class TestSearch(unittest.TestCase):
         )
 
         assert res.status_code == 200
-    
-    
+
     def test_search_time_range(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.search(
@@ -29,11 +28,10 @@ class TestSearch(unittest.TestCase):
             query="How can marchex help automotive dealerships?",
             start_time=1600223000,
             end_time=1701223034,
-        )   
-
+        )
 
         assert res.status_code == 200
-    
+
     def test_search_source_list(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.search(
@@ -43,8 +41,6 @@ class TestSearch(unittest.TestCase):
         )
 
         assert res.status_code == 200
-
-
 
 
 if __name__ == "__main__":
