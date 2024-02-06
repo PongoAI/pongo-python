@@ -16,8 +16,7 @@ class PongoClient:
     def __init__(self, secret_key, version="v1"):
         """
         Initializes a PongoClient object.
-        :param user_id: User ID. This looks like pongo_public_....
-        :param secret_key: Secret key. This looks like pongo_secret_*****
+        :param secret_key: Secret API key.
         """
         self._secret_key = secret_key
         self.version = version
@@ -275,7 +274,6 @@ class PongoClient:
         :param sub_org_id: Optional- ID of the organization to pull the job from.  If no id is provided, the main organization's ID will be used.
         """
         return get_jobs(
-            public_key=self.user_id,
             secret_key=self._secret_key,
             job_status=job_status,
             sub_org_id=sub_org_id,
@@ -290,7 +288,6 @@ class PongoClient:
         :param sub_org_id: Optional- ID of the organization to pull the job from.  If no id is provided, the main organization's ID will be used.
         """
         return get_job(
-            public_key=self.user_id,
             secret_key=self._secret_key,
             sub_org_id=sub_org_id,
             job_id=job_id,

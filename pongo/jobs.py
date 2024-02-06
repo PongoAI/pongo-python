@@ -3,7 +3,6 @@ from .utils import BASE_URL
 
 
 def get_job(
-    public_key,
     secret_key,
     sub_org_id=None,
     job_id=None,
@@ -16,7 +15,6 @@ def get_job(
     """
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/job"
 
@@ -33,7 +31,6 @@ def get_job(
     return response
 
 def get_jobs(
-    public_key,
     secret_key,
     job_status,
     sub_org_id=None,
@@ -47,7 +44,6 @@ def get_jobs(
     """
     headers = {
         "secret": secret_key,
-        "id": public_key,
     }
     url = f"{BASE_URL}/api/{version}/jobs"
 
