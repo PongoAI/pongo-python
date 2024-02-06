@@ -11,16 +11,14 @@ MAX_FILE_SIZE = 20 * 1024 * 1024
 def upload(
     public_key,
     secret_key,
-    source_name,
     data,
     sub_org_id=None,
     metadata={},
-    parent_id=None,
     timestamp=None,
     version="v1",
 ):
     """
-    Uploads a file to a specified URL using provided credentials.
+    Uploads data to pongo and returns a job id for the upload.
 
     :param file_path: Path to the file to be uploaded.
     :param destination_url: URL where the file will be uploaded.
@@ -38,18 +36,32 @@ def upload(
     if type(data) == str or type(data) == list:
         payload = {
             "sub_org_id": sub_org_id,
-            "source": source_name,
             "data": data,
             "metadata": metadata,
             "timestamp": timestamp,
-            "parent_id": parent_id,
         }
+    else:
+        raise ValueError("Data must be a string or a list of strings.")
+
+    if type(metadata) == dict:
+        if 'parent_id' not in metadata:
+            raise ValueError("Metadata must contain a parent_id.")
+        
+        if 'source' not in metadata:
+            raise ValueError("Metadata must contain a source.")
+    
+    elif type(metadata) == list:
+        for indx, meta in enumerate(metadata):
+            if 'parent_id' not in meta:
+                raise ValueError(f"Metadata must contain a parent_id. Missing at index {indx}.")
+            
+            if 'source' not in meta:
+                raise ValueError(f"Metadata must contain a source. Missing at index {indx}.")
+    else:
+        raise ValueError("Metadata must be a dictionary or a list of dictionaries.")
 
     if not timestamp:
         payload["timestamp"] = int(time.time())
-
-    if not parent_id:
-        payload["parent_id"] = str(uuid.uuid4())
 
     response = requests.post(url, headers=headers, json=payload)
     return response

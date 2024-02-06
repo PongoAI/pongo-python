@@ -7,8 +7,8 @@ def search(
     secret_key,
     query,
     sub_org_id=None,
-    num_results=15,
-    max_reranker_results=5,
+    num_results=10,
+    sample_size=15,
     start_time=None,
     end_time=None,
     sources=[],
@@ -31,7 +31,7 @@ def search(
         "start_time": start_time,
         "end_time": end_time,
         "num_results": num_results,
-        "max_reranker_results": max_reranker_results,
+        "sample_size": sample_size,
     }
 
     params = {key: value if not isinstance(value, list) else ','.join(value) for key, value in payload.items() if value is not None}

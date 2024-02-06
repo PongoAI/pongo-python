@@ -52,8 +52,8 @@ class PongoClient:
         start_time=None,
         end_time=None,
         sources=[],
-        num_results=15,
-        max_reranker_results=5,
+        num_results=10,
+        sample_size=15,
     ):
         """
         Searches for data in the Pongo API.
@@ -68,7 +68,7 @@ class PongoClient:
             start_time=start_time,
             end_time=end_time,
             num_results=num_results,
-            max_reranker_results=max_reranker_results,
+            sample_size=sample_size,
             version=self.version,
         )
 
@@ -88,7 +88,7 @@ class PongoClient:
         )
 
     def upload(
-        self,  source_name, data,sub_org_id=None, parent_id=None, metadata={}, timestamp=None
+        self, data,sub_org_id=None, metadata={}, timestamp=None
     ):
         """
         Uploads a data to pongo for semantic search.
@@ -104,11 +104,9 @@ class PongoClient:
             public_key=self.user_id,
             secret_key=self._secret_key,
             sub_org_id=sub_org_id,
-            source_name=source_name,
             data=data,
             metadata=metadata,
             timestamp=timestamp,
-            parent_id=parent_id,
             version=self.version,
         )
     
