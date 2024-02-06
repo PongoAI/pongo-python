@@ -4,6 +4,7 @@ pongo/__init__.py
 pongo/client.py
 pongo/delete.py
 pongo/get.py
+pongo/jobs.py
 pongo/org_management.py
 pongo/scrape.py
 pongo/search.py
@@ -23,6 +24,7 @@ tests/test_delete.py
 tests/test_disconnect_integration.py
 tests/test_get.py
 tests/test_get_auth_link.py
+tests/test_jobs.py
 tests/test_long_upload.py
 tests/test_org_mgmt.py
 tests/test_search.py
