@@ -5,3 +5,4 @@ pongo/__pycache__/
 venv/
 build/
 dist/
+ignore/
