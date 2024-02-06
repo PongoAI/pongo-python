@@ -7,6 +7,7 @@ from .search import search
 from .get import get
 from .delete import delete
 from .org_management import create_sub_org, get_sub_orgs, delete_sub_org, update_sub_org
+from .jobs import get_job, get_jobs
 from .utils import BASE_URL
 import requests
 
@@ -15,8 +16,7 @@ class PongoClient:
     def __init__(self, secret_key, version="v1"):
         """
         Initializes a PongoClient object.
-        :param user_id: User ID. This looks like pongo_public_....
-        :param secret_key: Secret key. This looks like pongo_secret_*****
+        :param secret_key: Secret API key.
         """
         self._secret_key = secret_key
         self.version = version
@@ -265,5 +265,31 @@ class PongoClient:
         return delete_sub_org(
             secret_key=self._secret_key,
             sub_org_id=sub_org_id,
+            version=self.version,
+        )
+    def get_jobs(self, job_status, sub_org_id=None, page=0):
+        """
+        Retrieves a list of jobs from the Pongo in paginated format.
+        :param job_status: Status of jobs to retreive.  Options are "*", "queued", "processing", and "processed".
+        :param sub_org_id: Optional- ID of the organization to pull the job from.  If no id is provided, the main organization's ID will be used.
+        """
+        return get_jobs(
+            secret_key=self._secret_key,
+            job_status=job_status,
+            sub_org_id=sub_org_id,
+            page=page,
+            version=self.version,
+        )
+
+    def get_job(self, job_id, sub_org_id=None):
+        """
+        Retrieves a single job from the Pongo API.
+        :param job_id: ID of the job to be retrieved.
+        :param sub_org_id: Optional- ID of the organization to pull the job from.  If no id is provided, the main organization's ID will be used.
+        """
+        return get_job(
+            secret_key=self._secret_key,
+            sub_org_id=sub_org_id,
+            job_id=job_id,
             version=self.version,
         )
