@@ -2,11 +2,12 @@ import unittest
 import pongo
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
 
-PONGO_SECRET = os.getenv("PONGO_SECRET")
+PONGO_SECRET = os.getenv("PONGO_KEY")
 pongo_client = pongo.PongoClient(PONGO_SECRET)
 
 
@@ -14,8 +15,8 @@ class TestGet(unittest.TestCase):
     def test_single(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
-            # sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-            doc_id="be738d73-3326-35bb-825c-9b59a489bace",
+            sub_org_id="351989f7-0e84-4009-8ec4-ead4463e60a8",
+            doc_id="bf9b5113-4a26-315e-a7d3-bc5910fb7ef6",
         )
 
         assert res.status_code == 200
@@ -23,9 +24,12 @@ class TestGet(unittest.TestCase):
     def test_get_parent(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.get(
-            # sub_org_id="9ce132df-4360-4c38-8a36-016cd66c678d",
-            parent_id="0107f9fc-5a15-4e41-a61e-8ecd41902cf6",
+            sub_org_id="351989f7-0e84-4009-8ec4-ead4463e60a8",
+            parent_id="test_lvmh_doc",
         )
+
+        assert len(res.json()) == 173
+        assert res.json()[0]["doc_index"] == 0
 
         assert res.status_code == 200
 
