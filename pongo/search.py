@@ -8,6 +8,7 @@ def search(
     sub_org_id=None,
     num_results=10,
     sample_size=15,
+    reduce_tokens=False,
     start_time=None,
     end_time=None,
     sources=[],
@@ -28,6 +29,7 @@ def search(
         "sources": sources,
         "start_time": start_time,
         "end_time": end_time,
+        "reduce_tokens": reduce_tokens,
         "num_results": num_results,
         "sample_size": sample_size,
     }
