@@ -5,7 +5,7 @@ def rerank(secret_key, query, docs, num_results=10, vec_sample_size=25, public_m
     headers = {
         'secret': secret_key,
     }
-    url = f"http://localhost:8000/api/{version}/rerank"
+    url = f"{BASE_URL}/api/{version}/rerank"
 
     payload = {
         'query': query,
