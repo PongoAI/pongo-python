@@ -9,6 +9,7 @@ from .delete import delete
 from .org_management import create_sub_org, get_sub_orgs, delete_sub_org, update_sub_org
 from .jobs import get_job, get_jobs
 from .utils import BASE_URL
+from .rerank import rerank
 import requests
 
 
@@ -69,6 +70,43 @@ class PongoClient:
             sample_size=sample_size,
             version=self.version,
         )
+
+
+
+
+    def rerank(
+    self,
+    query, 
+    docs, 
+    num_results=10, 
+    vec_sample_size=25, 
+    public_metadata_field='metadata', 
+    key_field='id', 
+    plaintext_sample_size=5, 
+    text_field='text', 
+    version="v1"
+    ):
+        """
+         Reranks the documents provided, reccomended to pass 50-100 results
+         :param query - Query used to get the initial results
+         :param numResults (optional) - Total number of results to return at the end of the operation
+         :param vecSampleSize (optional) - Number of vector results to pass into the reranker at the end of Pongo's workflow
+         :param plaintextSampleSize (optional) - Number of plain text results to pass into the reranker at the end of Pongo's workflow
+         :param publicMetadataField (optional) - Name of the key in each docs object that contains metadata information to be included in pongo's reranking- defaults to "metadata"
+         :param keyField (optional) - Name of the key in each docs object to be used as their id, defaults to "id"
+         :param textField (optional) - Name of the key in each docs object to do the reranking on, defaults to "text"
+        """
+        return rerank(
+            secret_key=self._secret_key, 
+            query=query, 
+            docs=docs, 
+            num_results=num_results, 
+            vec_sample_size=vec_sample_size, 
+            public_metadata_field=public_metadata_field, 
+            key_field=key_field, 
+            plaintext_sample_size=plaintext_sample_size, 
+            text_field=text_field, 
+            version=version)
 
     def get(self, sub_org_id=None, doc_id=None, parent_id=None):
         """
