@@ -7,7 +7,7 @@ def rerank(
     query,
     docs,
     num_results=10,
-    vec_sample_size=25,
+    vec_sample_size=35,
     public_metadata_field="metadata",
     key_field="id",
     plaintext_sample_size=5,
