@@ -43,6 +43,7 @@ class PongoClient:
         key_field="id",
         plaintext_sample_size=5,
         text_field="text",
+        expand=False,
         version="v1",
     ):
         """
@@ -65,5 +66,6 @@ class PongoClient:
             key_field=key_field,
             plaintext_sample_size=plaintext_sample_size,
             text_field=text_field,
+            expand=expand,
             version=version,
         )

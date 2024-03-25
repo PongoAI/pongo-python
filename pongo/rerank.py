@@ -12,6 +12,7 @@ def rerank(
     key_field="id",
     plaintext_sample_size=5,
     text_field="text",
+    expand=False,
     version="v1",
 ):
     headers = {
@@ -28,6 +29,7 @@ def rerank(
         "vec_sample_size": vec_sample_size,
         "key_field": key_field,
         "docs": docs,
+        "expand": expand,
     }
 
     body = {k: v for k, v in payload.items() if v is not None}
