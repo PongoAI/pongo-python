@@ -14,6 +14,8 @@ pongo_client = pongo.PongoClient(PONGO_SECRET)
 class TestSearch(unittest.TestCase):
     def test_search(self):
         # Ensure that the client is initialized properly and connected to server
+
+
         res = pongo_client.rerank(
             docs=[
                 {"ig": 1, "text": "Roses are red", "betadata": {}},
@@ -32,6 +34,8 @@ class TestSearch(unittest.TestCase):
         assert len(res.json()) == 3
 
         assert res.status_code == 200
+
+
 
 
 if __name__ == "__main__":
