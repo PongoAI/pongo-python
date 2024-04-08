@@ -2,7 +2,7 @@ import requests
 from .utils import BASE_URL
 
 
-def rerank(
+def sem_filter(
     secret_key,
     query,
     docs,
@@ -18,7 +18,7 @@ def rerank(
     headers = {
         "secret": secret_key,
     }
-    url = f"{BASE_URL}/api/{version}/rerank"
+    url = f"{BASE_URL}/api/{version}/filter"
 
     payload = {
         "query": query,
