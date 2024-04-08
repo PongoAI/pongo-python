@@ -2,7 +2,7 @@ LICENSE
 setup.py
 pongo/__init__.py
 pongo/client.py
-pongo/rerank.py
+pongo/filter.py
 pongo/utils.py
 pongo_python.egg-info/PKG-INFO
 pongo_python.egg-info/SOURCES.txt
@@ -10,4 +10,4 @@ pongo_python.egg-info/dependency_links.txt
 pongo_python.egg-info/requires.txt
 pongo_python.egg-info/top_level.txt
 tests/test_auth.py
-tests/test_rerank.py
+tests/test_filter.py

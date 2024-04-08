@@ -16,7 +16,7 @@ class TestSearch(unittest.TestCase):
         # Ensure that the client is initialized properly and connected to server
 
 
-        res = pongo_client.rerank(
+        res = pongo_client.sem_filter(
             docs=[
                 {"ig": 1, "text": "Roses are red", "betadata": {}},
                 {"ig": 2, "text": "Violets are blue", "betadata": {}},
