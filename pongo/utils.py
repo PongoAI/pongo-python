@@ -1,1 +1,1 @@
-BASE_URL = "https://v2.api.joinpongo.com"
+BASE_URL = "https://api.joinpongo.com"
