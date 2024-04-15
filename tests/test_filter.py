@@ -24,6 +24,7 @@ class TestSearch(unittest.TestCase):
             num_results=3,
             query="what color are roses?",
             public_metadata_field="betadata",
+            expand=True,
             key_field="ig",
         )
 

@@ -1,10 +1,10 @@
+import json
 import requests
 from .utils import BASE_URL
-import json
 import gzip
 
 
-def rerank(
+def filter(
     secret_key,
     query,
     docs,
