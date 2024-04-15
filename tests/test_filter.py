@@ -14,7 +14,7 @@ pongo_client = pongo.PongoClient(PONGO_SECRET)
 class TestSearch(unittest.TestCase):
     def test_search(self):
         # Ensure that the client is initialized properly and connected to server
-        res = pongo_client.rerank(
+        res = pongo_client.filter(
             docs=[
                 {"ig": 1, "text": "Roses are red", "betadata": {}},
                 {"ig": 2, "text": "Violets are blue", "betadata": {}},
