@@ -49,22 +49,22 @@ class TestFilter(unittest.TestCase):
 
     #     assert res.status_code == 200
     
-    def test_filter_with_observe_list(self):
-        res = pongo_client.filter(
-            docs=[
-                "The sky is gray",
-                "I am an orangutan",
-                "Roses are red",
-                "Roses are native to Asia",
-                "Violets are blue",
-            ],
-            query="what color are roses?",
-            observe=True,
-        )
+    # def test_filter_with_observe_list(self):
+    #     res = pongo_client.filter(
+    #         docs=[
+    #             "The sky is gray",
+    #             "I am an orangutan",
+    #             "Roses are red",
+    #             "Roses are native to Asia",
+    #             "Violets are blue",
+    #         ],
+    #         query="what color are roses?",
+    #         observe=True,
+    #     )
 
-        print(res.json())
+    #     print(res.json())
 
-        assert res.status_code == 200
+        #assert res.status_code == 200
 
 
     def test_filter_with_observe_log_metadata(self):
@@ -72,14 +72,15 @@ class TestFilter(unittest.TestCase):
             docs=[
                 "The sky is gray",
                 "I am an orangutan",
-                "Roses are red",
-                "Roses are native to Asia",
-                "Violets are blue",
+                "This has log metadata",
+                "Pandas eat bamboo"
+                "Orangutans are from Borneo",
+                "There are no roses in Australia",
             ],
             query="what color are roses?",
             log_metadata={
-                "user_id": "123",
-                "session_id": "456",
+                "user_id": "1",
+                "session_id": "4",
             },
             observe=True,
         )

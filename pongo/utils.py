@@ -1,1 +1,1 @@
-BASE_URL = "https://caleb.ngrok.dev"
+BASE_URL = "https://thanos-staging.joinpongo.com"
