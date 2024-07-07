@@ -3,6 +3,7 @@ setup.py
 pongo/__init__.py
 pongo/client.py
 pongo/filter.py
+pongo/observe.py
 pongo/rerank.py
 pongo/utils.py
 pongo_python.egg-info/PKG-INFO
@@ -12,3 +13,4 @@ pongo_python.egg-info/requires.txt
 pongo_python.egg-info/top_level.txt
 tests/test_auth.py
 tests/test_filter.py
+tests/test_observe.py

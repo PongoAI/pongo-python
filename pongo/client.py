@@ -1,6 +1,7 @@
 from .utils import BASE_URL
 from .rerank import rerank
 from .filter import filter
+from .observe import observe
 import requests
 
 
@@ -23,13 +24,9 @@ class PongoClient:
             raise Exception("Server error")
 
     def heartbeat(self):
-        url = f"{BASE_URL}/api/{self.version}/authorize_user"
-        headers = {"secret": self._secret_key}
-        response = requests.get(url, headers=headers)
-
-        if response.status_code == 401:
-            raise Exception("Invalid credentials")
-        elif response.status_code == 500:
+        url = f"{BASE_URL}/api/{self.version}/"
+        response = requests.get(url)
+        if response.status_code == 500:
             raise Exception("Server error")
         else:
             return response
@@ -48,6 +45,7 @@ class PongoClient:
         version="v1",
     ):
         """
+        ALIAS to filter api
         Reranks the documents provided, reccomended to pass 50-100 results
         :param query - Query used to get the initial results
         :param numResults (optional) - Total number of results to return at the end of the operation
@@ -82,7 +80,8 @@ class PongoClient:
         key_field="id",
         plaintext_sample_size=5,
         text_field="text",
-        expand=False,
+        log_metadata=None,
+        observe=False,
         version="v1",
     ):
         """
@@ -105,6 +104,22 @@ class PongoClient:
             key_field=key_field,
             plaintext_sample_size=plaintext_sample_size,
             text_field=text_field,
-            expand=expand,
+            log_metadata=log_metadata,
+            observe=observe,
+            version=version,
+        )
+
+    def observe(
+        self,
+        query,
+        docs,
+        log_metadata=None,
+        version="v1",
+    ):
+        return observe(
+            secret_key=self._secret_key,
+            query=query,
+            docs=docs,
+            log_metadata=log_metadata,
             version=version,
         )

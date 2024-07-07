@@ -1,41 +1,28 @@
 import json
+from typing import Any, Dict, List
 import requests
 from .utils import BASE_URL
 import gzip
 
 
-def filter(
-    secret_key,
-    query,
-    docs,
-    num_results=10,
-    vec_sample_size=35,
-    public_metadata_field="metadata",
-    key_field="id",
-    plaintext_sample_size=5,
-    text_field="text",
-    log_metadata=None,
-    observe=False,
-    version="v1",
+def observe(
+    secret_key:str,
+    query:str,
+    docs:List[str],
+    log_metadata:Dict[str, Any] = None,
+    version:str = "v1",
 ):
     headers = {
         "secret": secret_key,
         'Content-Encoding': 'gzip',
         'Content-Type': 'application/json',
     }
-    url = f"{BASE_URL}/api/{version}/filter"
+    url = f"{BASE_URL}/api/{version}/observe"
 
     payload = {
         "query": query,
-        "text_field": text_field,
-        "public_metadata_field": public_metadata_field,
-        "plaintext_sample_size": plaintext_sample_size,
-        "num_results": num_results,
-        "vec_sample_size": vec_sample_size,
-        "key_field": key_field,
         "docs": docs,
         "log_metadata": log_metadata,
-        "observe": observe,
     }
 
     body = {k: v for k, v in payload.items() if v is not None}
