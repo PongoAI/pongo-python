@@ -1,1 +1,1 @@
-BASE_URL = "https://thanos-staging.joinpongo.com"
+BASE_URL = "https://api.joinpongo.com"

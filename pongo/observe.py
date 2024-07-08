@@ -6,16 +6,16 @@ import gzip
 
 
 def observe(
-    secret_key:str,
-    query:str,
-    docs:List[str],
-    log_metadata:Dict[str, Any] = None,
-    version:str = "v1",
+    secret_key: str,
+    query: str,
+    docs: List[str],
+    log_metadata: Dict[str, Any] = None,
+    version: str = "v1",
 ):
     headers = {
         "secret": secret_key,
-        'Content-Encoding': 'gzip',
-        'Content-Type': 'application/json',
+        "Content-Encoding": "gzip",
+        "Content-Type": "application/json",
     }
     url = f"{BASE_URL}/api/{version}/observe"
 
@@ -28,7 +28,7 @@ def observe(
     body = {k: v for k, v in payload.items() if v is not None}
 
     # Serialize the data to JSON format
-    json_data = json.dumps(body).encode('utf-8')
+    json_data = json.dumps(body).encode("utf-8")
 
     # Compress the JSON data using gzip
     compressed_data = gzip.compress(json_data)
