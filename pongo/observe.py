@@ -1,21 +1,15 @@
 import json
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 import requests
 from .utils import BASE_URL
 import gzip
 
 
-def rerank(
+def observe(
     secret_key: str,
     query: str,
-    docs: Union[List[str], List[Dict[str, Any]]],
-    num_results: int = 10,
-    vec_sample_size: int = 25,
-    public_metadata_field: str = "metadata",
-    key_field: str = "id",
-    plaintext_sample_size: int = 5,
-    text_field: str = "text",
-    expand: bool = False,
+    docs: List[str],
+    log_metadata: Dict[str, Any] = None,
     version: str = "v1",
 ):
     headers = {
@@ -23,18 +17,12 @@ def rerank(
         "Content-Encoding": "gzip",
         "Content-Type": "application/json",
     }
-    url = f"{BASE_URL}/api/{version}/filter"
+    url = f"{BASE_URL}/api/{version}/observe"
 
     payload = {
         "query": query,
-        "text_field": text_field,
-        "public_metadata_field": public_metadata_field,
-        "plaintext_sample_size": plaintext_sample_size,
-        "num_results": num_results,
-        "vec_sample_size": vec_sample_size,
-        "key_field": key_field,
         "docs": docs,
-        "expand": expand,
+        "log_metadata": log_metadata,
     }
 
     body = {k: v for k, v in payload.items() if v is not None}

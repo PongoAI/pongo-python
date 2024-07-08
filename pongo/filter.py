@@ -14,13 +14,14 @@ def filter(
     key_field="id",
     plaintext_sample_size=5,
     text_field="text",
-    expand=False,
+    log_metadata=None,
+    observe=False,
     version="v1",
 ):
     headers = {
         "secret": secret_key,
-        'Content-Encoding': 'gzip',
-        'Content-Type': 'application/json',
+        "Content-Encoding": "gzip",
+        "Content-Type": "application/json",
     }
     url = f"{BASE_URL}/api/{version}/filter"
 
@@ -33,13 +34,14 @@ def filter(
         "vec_sample_size": vec_sample_size,
         "key_field": key_field,
         "docs": docs,
-        "expand": expand,
+        "log_metadata": log_metadata,
+        "observe": observe,
     }
 
     body = {k: v for k, v in payload.items() if v is not None}
 
     # Serialize the data to JSON format
-    json_data = json.dumps(body).encode('utf-8')
+    json_data = json.dumps(body).encode("utf-8")
 
     # Compress the JSON data using gzip
     compressed_data = gzip.compress(json_data)

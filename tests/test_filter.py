@@ -6,13 +6,12 @@ import os
 load_dotenv()
 
 
-PONGO_SECRET =  '7309ef003c354494b6f3f8b6951b857f'
-
+PONGO_SECRET = os.getenv("PONGO_KEY")
 pongo_client = pongo.PongoClient(PONGO_SECRET)
 
 
-class TestSearch(unittest.TestCase):
-    def test_search(self):
+class TestFilter(unittest.TestCase):
+    def test_filter(self):
         # Ensure that the client is initialized properly and connected to server
         res = pongo_client.filter(
             docs=[
@@ -24,13 +23,67 @@ class TestSearch(unittest.TestCase):
             num_results=3,
             query="what color are roses?",
             public_metadata_field="betadata",
-            expand=True,
             key_field="ig",
         )
 
         print(res.json())
 
         assert len(res.json()) == 3
+
+        assert res.status_code == 200
+
+    def test_filter_with_observe_dict(self):
+        res = pongo_client.filter(
+            docs=[
+                {"id": "a", "text": "The sky is gray"},
+                {"id": "b", "text": "I am an orangutan"},
+                {"id": "c", "text": "Roses are red"},
+                {"id": "d", "text": "Roses are native to Asia"},
+                {"id": "e", "text": "Violets are blue"},
+            ],
+            query="what color are roses?",
+            observe=True,
+        )
+
+        print(res.json())
+
+        assert res.status_code == 200
+
+    def test_filter_with_observe_list(self):
+        res = pongo_client.filter(
+            docs=[
+                "The sky is gray",
+                "I am an orangutan",
+                "Roses are red",
+                "Roses are native to Asia",
+                "Violets are blue",
+            ],
+            query="what color are roses?",
+            observe=True,
+        )
+
+        print(res.json())
+
+        assert res.status_code == 200
+
+    def test_filter_with_observe_log_metadata(self):
+        res = pongo_client.filter(
+            docs=[
+                "The sky is gray",
+                "I am an orangutan",
+                "This has log metadata",
+                "Pandas eat bamboo" "Orangutans are from Borneo",
+                "There are no roses in Australia",
+            ],
+            query="what color are roses?",
+            log_metadata={
+                "user_id": "1",
+                "session_id": "4",
+            },
+            observe=True,
+        )
+
+        print(res.json())
 
         assert res.status_code == 200
 
