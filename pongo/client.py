@@ -42,6 +42,7 @@ class PongoClient:
         plaintext_sample_size=5,
         text_field="text",
         version="v1",
+        region="us-west-2",
     ):
         """
         ALIAS to filter api
@@ -65,6 +66,7 @@ class PongoClient:
             plaintext_sample_size=plaintext_sample_size,
             text_field=text_field,
             version=version,
+            region=region,
         )
 
     def filter(
@@ -80,6 +82,7 @@ class PongoClient:
         log_metadata=None,
         observe=False,
         version="v1",
+        region="us-west-2",
     ):
         """
         Semantic filter over the documents provided, recommended to pass 75-150 results
@@ -104,6 +107,7 @@ class PongoClient:
             log_metadata=log_metadata,
             observe=observe,
             version=version,
+            region=region,
         )
 
     def observe(
@@ -112,6 +116,7 @@ class PongoClient:
         docs,
         log_metadata=None,
         version="v1",
+        region="us-west-2",
     ):
         return observe(
             secret_key=self._secret_key,
@@ -119,4 +124,5 @@ class PongoClient:
             docs=docs,
             log_metadata=log_metadata,
             version=version,
+            region=region,
         )

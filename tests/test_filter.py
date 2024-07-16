@@ -24,6 +24,7 @@ class TestFilter(unittest.TestCase):
             query="what color are roses?",
             public_metadata_field="betadata",
             key_field="ig",
+            region="us-east-1",
         )
 
         print(res.json())
@@ -43,6 +44,7 @@ class TestFilter(unittest.TestCase):
             ],
             query="what color are roses?",
             observe=True,
+            region="us-east-1",
         )
 
         print(res.json())
@@ -60,6 +62,7 @@ class TestFilter(unittest.TestCase):
             ],
             query="what color are roses?",
             observe=True,
+            region="us-east-1",
         )
 
         print(res.json())
@@ -81,6 +84,7 @@ class TestFilter(unittest.TestCase):
                 "session_id": "4",
             },
             observe=True,
+            region="us-east-1",
         )
 
         print(res.json())
