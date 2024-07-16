@@ -1,7 +1,7 @@
 import json
 from typing import Any, Dict, List, Union
 import requests
-from .utils import BASE_URL
+from .utils import REGION_MAP, BASE_URL
 import gzip
 
 
@@ -17,13 +17,15 @@ def rerank(
     text_field: str = "text",
     expand: bool = False,
     version: str = "v1",
+    region: str = "us-west-2",
 ):
     headers = {
         "secret": secret_key,
         "Content-Encoding": "gzip",
         "Content-Type": "application/json",
     }
-    url = f"{BASE_URL}/api/{version}/filter"
+    base_url = REGION_MAP.get(region, BASE_URL)
+    url = f"{base_url}/api/{version}/rerank"
 
     payload = {
         "query": query,

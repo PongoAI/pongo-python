@@ -1,7 +1,7 @@
 import json
 from typing import Any, Dict, List
 import requests
-from .utils import BASE_URL
+from .utils import BASE_URL, REGION_MAP
 import gzip
 
 
@@ -11,13 +11,15 @@ def observe(
     docs: List[str],
     log_metadata: Dict[str, Any] = None,
     version: str = "v1",
+    region: str = "us-west-2",
 ):
     headers = {
         "secret": secret_key,
         "Content-Encoding": "gzip",
         "Content-Type": "application/json",
     }
-    url = f"{BASE_URL}/api/{version}/observe"
+    base_url = REGION_MAP.get(region, BASE_URL)
+    url = f"{base_url}/api/{version}/observe"
 
     payload = {
         "query": query,

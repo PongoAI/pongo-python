@@ -1,6 +1,6 @@
 import json
 import requests
-from .utils import BASE_URL
+from .utils import BASE_URL, REGION_MAP
 import gzip
 
 
@@ -17,13 +17,15 @@ def filter(
     log_metadata=None,
     observe=False,
     version="v1",
+    region: str = "us-west-2",
 ):
     headers = {
         "secret": secret_key,
         "Content-Encoding": "gzip",
         "Content-Type": "application/json",
     }
-    url = f"{BASE_URL}/api/{version}/filter"
+    base_url = REGION_MAP.get(region, BASE_URL)
+    url = f"{base_url}/api/{version}/filter"
 
     payload = {
         "query": query,
